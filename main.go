@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
-	"math/rand/v2" // 使用 v2 版本的 rand 包
+	"math/rand/v2"
 	"net/http"
 	"sync"
 	"time"
