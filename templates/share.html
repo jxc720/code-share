@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Code Snippet</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 2rem 0; /* 添加顶部和底部的内边距 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: padding 0.5s ease;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            transition: width, border-radius 0.5s ease;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        select, textarea {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #333;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        button {
+            width: 23%;
+            padding: 0.75rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, width 0.5s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        /* 响应式样式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+                transition: padding 0.5s ease;
+            }
+            .form-container {
+                border-radius: 0;
+                width: 100%;
+                transition: width,border-radius 0.5s ease;
+            }
+            .form-row {
+                flex-direction: column; /* 移动端改为垂直布局 */
+                gap: 1rem;
+            }
+
+            .form-group {
+                flex: 1 1 100%; /* 每个 form-group 占据 100% 的宽度 */
+            }
+
+            button {
+                width: 100%; /* 提交按钮也占满宽度 */
+                transition: width 0.5s ease;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Share Code Snippet</h1>
+    <form method="POST">
+        <!-- 将 Code Type、Expires In 和 Share 按钮放在一行 -->
+        <div class="form-row">
+            <!-- Code Type 下拉选择 -->
+            <div class="form-group">
+                <label for="codeType">Code Type:</label>
+                <select id="codeType" name="codeType" required>
+                    <option value="javascript">JSON</option>
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="go">Go</option>
+                    <option value="java">Java</option>
+                    <option value="csharp">C#</option>
+                    <option value="php">PHP</option>
+                    <option value="html">HTML</option>
+                </select>
+            </div>
+
+            <!-- Expires In 下拉选择 -->
+            <div class="form-group">
+                <label for="expires">Expires In:</label>
+                <select id="expires" name="expires" required>
+                    <option value="1h">1 Hour</option>
+                    <option value="5m">5 Minutes</option>
+                    <option value="24h">1 Day</option>
+                    <option value="72h">3 Days</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <!-- Code 输入框 -->
+            <div class="form-group">
+                <label for="code">Code:</label>
+                <textarea id="code" name="code" rows="15" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <!-- 提交按钮 -->
+            <div class="form-group">
+                <button type="submit">Share</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

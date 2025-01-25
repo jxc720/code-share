@@ -1,0 +1,41 @@
+# 定义目标平台和架构
+PLATFORMS = \
+    linux/amd64 \
+    linux/arm64 \
+    windows/amd64 \
+    darwin/amd64 \
+    darwin/arm64
+
+# 项目名称
+PROJECT_NAME = code-share
+
+# 输出目录
+OUTPUT_DIR = build
+
+# 默认目标
+all: build
+
+# 编译目标
+build:
+	@for platform in $(PLATFORMS); do \
+		GOOS=$$(echo $$platform | cut -d'/' -f1); \
+		GOARCH=$$(echo $$platform | cut -d'/' -f2); \
+		OUTPUT_PATH=$(OUTPUT_DIR)/$$GOOS-$$GOARCH/$(PROJECT_NAME); \
+		if [ "$$GOOS" = "windows" ]; then \
+			OUTPUT_PATH="$$OUTPUT_PATH.exe"; \
+		fi; \
+		echo "Building for $$GOOS/$$GOARCH..."; \
+		env GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUTPUT_PATH; \
+		if [ $$? -ne 0 ]; then \
+			echo "Failed to build for $$GOOS/$$GOARCH"; \
+			exit 1; \
+		else \
+			echo "Build successful: $$OUTPUT_PATH"; \
+		fi; \
+	done
+
+# 清理输出目录
+clean:
+	rm -rf $(OUTPUT_DIR)
+
+.PHONY: all build clean
